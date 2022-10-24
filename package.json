@@ -1,0 +1,21 @@
+{
+  "name": "DPS_TEST",
+  "version": "1.0.0",
+  "main": "./server/app.js",
+  "author": "Davin Reid",
+  "license": "MIT",
+  "type": "module",
+  "dependencies": {
+    "concurrently": "^7.5.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "morgan": "^1.10.0",
+    "sequelize": "^6.25.3",
+    "sqlite3": "^5.1.2"
+  },
+  "scripts": {
+    "start": "node ./server/app.js",
+    "server": "nodemon ./server/app.js"
+  }
+}
