@@ -3,6 +3,7 @@ import data from './fakedata.json';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { Form, InputGroup } from 'react-bootstrap';
 import { useState } from 'react';
 
 function App() {
@@ -13,29 +14,35 @@ function App() {
 
   return (
     <div>
-      <h1 style={{ textAlign: 'center', marginBottom: '2%' }}>
+      <h1 style={{ textAlign: 'center', margin: '2% 0' }}>
         Welcome to DPS (Deal Processing System)
       </h1>
       <div>
         <Button
-          style={{ position: 'absolute', right: '6%', top: '2.5%' }}
+          style={{ position: 'absolute', right: '6%', top: '5%' }}
           onClick={handleShow}
         >
           Create New Deal
         </Button>
         <Modal show={show} onHide={handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Creat New Deal</Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
-            </Button>
-          </Modal.Footer>
+          <Modal.Body>
+            <InputGroup className="mb-3">
+              <InputGroup.Text>Name</InputGroup.Text>
+              <Form.Control />
+            </InputGroup>
+            <Form.Select className="mb-3">
+              <option>Select a Relationship Manager for your deal</option>
+              <option value="Davin Reid">Davin Reid</option>
+              <option value="Nina Goldfarb">Nina Goldfarb</option>
+            </Form.Select>
+            <InputGroup>
+              <Form.Control />
+              <InputGroup.Text>Deal Amount</InputGroup.Text>
+            </InputGroup>
+          </Modal.Body>
         </Modal>
         <Table striped bordered hover style={{ textAlign: 'center' }}>
           <thead>
