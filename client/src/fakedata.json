@@ -1,0 +1,28 @@
+{
+  "deals": [
+    {
+      "id": 1,
+      "name": "DaxTech Ent",
+      "relationshipManager": "Nina Goldfarb",
+      "dealAmount": 1500000,
+      "createdAt": "2022-10-24T23:43:25.830Z",
+      "updatedAt": "2022-10-24T23:43:25.830Z"
+    },
+    {
+      "id": 2,
+      "name": "Tech Pros LLC",
+      "relationshipManager": "Nina Goldfarb",
+      "dealAmount": 600000,
+      "createdAt": "2022-10-20T23:43:25.830Z",
+      "updatedAt": "2022-10-20T23:43:25.830Z"
+    },
+    {
+      "id": 3,
+      "name": "Dell Technologies",
+      "relationshipManager": "Davin Reid",
+      "dealAmount": 2600000,
+      "createdAt": "2022-10-18T23:43:25.830Z",
+      "updatedAt": "2022-10-18T23:43:25.830Z"
+    }
+  ]
+}
