@@ -9,7 +9,7 @@ const app = express();
 
 // ENV Variables
 const PORT = process.env.PORT || 8080;
-const SQL_DB_URI = process.env.SQL_DB_URI || 'sqlite://./server/db/deals.db';
+const SQL_DB_URI = process.env.SQL_DB_URI || 'sqlite://./server/db/main.db';
 
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());

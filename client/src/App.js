@@ -58,12 +58,13 @@ function App() {
         return {
           name: prevValue.name,
           relationshipManager: prevValue.relationshipManager,
-          dealAmount: value,
+          dealAmount: value.toLocaleString(),
         };
       });
     }
   };
 
+  // Complete this function when api is created for changing db data.
   const handleEditDealChange = ({ target }) => {};
 
   const handleAddNewDeal = (e) => {
@@ -134,8 +135,8 @@ function App() {
               value={newDealData.relationshipManager}
             >
               <option>Select a Relationship Manager for your deal</option>
-              <option value="Davin Reid">Davin Reid</option>
-              <option value="Nina Goldfarb">Nina Goldfarb</option>
+              <option value="Bob Jones">Bob Jones</option>
+              <option value="Kelly Hartland">Kelly Hartland</option>
             </Form.Select>
             <InputGroup>
               <Form.Control
@@ -189,7 +190,7 @@ function App() {
                     <td>$ {deal.dealAmount.toLocaleString()}</td>
                     <td>
                       <Button
-                        variant="danger"
+                        variant="secondary"
                         onClick={() => {
                           handleShowEditDealMenu();
                           setDealInFocus(deal);
@@ -232,6 +233,7 @@ function App() {
                       </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
+                      <Button variant="danger">Delete Deal</Button>
                       <Button variant="warning">Submit Change</Button>
                     </Modal.Footer>
                   </Modal>
