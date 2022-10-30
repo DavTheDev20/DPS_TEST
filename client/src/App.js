@@ -10,6 +10,7 @@ function App() {
   const [showAddDealMenu, setShowAddDealMenu] = useState(false);
   const [showEditDealMenu, setShowEditDealMenu] = useState(false);
   const [dealInFocus, setDealInFocus] = useState({
+    id: '',
     name: '',
     relationshipManager: '',
     dealAmount: '',
@@ -65,7 +66,48 @@ function App() {
   };
 
   // Complete this function when api is created for changing db data.
-  const handleEditDealChange = ({ target }) => {};
+  const handleEditDealChange = ({ target }) => {
+    const { name, value } = target;
+
+    if (name === 'focusedName') {
+      setDealInFocus((prevValue) => {
+        return {
+          id: prevValue.id,
+          name: value,
+          relationshipManager: prevValue.relationshipManager,
+          dealAmount: prevValue.dealAmount,
+        };
+      });
+    } else if (name === 'focusedDealAmount') {
+      setDealInFocus((prevValue) => {
+        return {
+          id: prevValue.id,
+          name: prevValue.name,
+          relationshipManager: prevValue.relationshipManager,
+          dealAmount: value,
+        };
+      });
+    }
+  };
+
+  const handleEditDealSubmit = (e) => {
+    e.preventDefault();
+
+    axios({
+      method: 'PUT',
+      url: `http://localhost:8080/api/deals/edit/${dealInFocus.id}`,
+      data: { name: dealInFocus.name, dealAmount: dealInFocus.dealAmount },
+    })
+      .then((res) => {
+        console.log(res);
+        setShowEditDealMenu(false);
+        getDealData();
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err.message);
+      });
+  };
 
   const handleAddNewDeal = (e) => {
     e.preventDefault();
@@ -193,7 +235,12 @@ function App() {
                         variant="secondary"
                         onClick={() => {
                           handleShowEditDealMenu();
-                          setDealInFocus(deal);
+                          setDealInFocus({
+                            id: deal.id,
+                            name: deal.name,
+                            relationshipManager: deal.relationshipManager,
+                            dealAmount: deal.dealAmount,
+                          });
                         }}
                       >
                         Edit Deal
@@ -213,6 +260,7 @@ function App() {
                         <Form.Control
                           value={dealInFocus.name}
                           name="focusedName"
+                          onChange={handleEditDealChange}
                         />
                       </InputGroup>
                       <Form.Select
@@ -228,13 +276,21 @@ function App() {
                         <Form.Control
                           value={dealInFocus.dealAmount}
                           name="focusedDealAmount"
+                          onChange={handleEditDealChange}
                         />
                         <InputGroup.Text>Deal Amount</InputGroup.Text>
                       </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
                       <Button variant="danger">Delete Deal</Button>
-                      <Button variant="warning">Submit Change</Button>
+                      <Button
+                        variant="warning"
+                        type="button"
+                        onClick={handleEditDealSubmit}
+                        closeButton
+                      >
+                        Submit Change
+                      </Button>
                     </Modal.Footer>
                   </Modal>
                 </>

@@ -62,5 +62,24 @@ app.post('/api/create/deal', async (req, res, next) => {
 
   return res.status(200).json({ success: true, dealDetails: newDeal });
 });
+app.put('/api/deals/edit/:dealId', async (req, res) => {
+  const { name, relationshipManager, dealAmount } = req.body;
+  if (!name && !relationshipManager && !dealAmount) {
+    return res.status(400).json({
+      success: false,
+      error:
+        'Please include "name", "relationshipManager", and "dealAmount" in request body.',
+    });
+  }
+
+  try {
+    const dbResponse = await Deal.update(req.body, {
+      where: { id: req.params.dealId },
+    });
+    return res.status(200).json({ success: true, response: dbResponse });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
