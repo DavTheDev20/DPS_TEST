@@ -4,6 +4,9 @@ import express from 'express';
 import { Sequelize, Model, DataTypes } from 'sequelize';
 import morgan from 'morgan';
 import cors from 'cors';
+import { parse } from 'json2csv';
+import fs from 'fs';
+import path from 'path';
 
 const app = express();
 
@@ -88,6 +91,28 @@ app.delete('/api/deals/delete/:dealId', async (req, res) => {
   } catch (err) {
     return res.status(400).json({ success: false, error: err.message });
   }
+});
+app.get('/api/deals/extract', async (req, res) => {
+  const fields = ['id', 'name', 'relationshipManager', 'dealAmount'];
+  const opts = { fields };
+  const deals = await Deal.findAll();
+
+  const currDay = new Date().getDate();
+  const currMonth = new Date().getMonth();
+  const currYear = new Date().getFullYear();
+  const dateString = `${
+    currMonth < 12 ? currMonth + 1 : 1
+  }.${currDay}.${currYear}`;
+
+  const csv = parse(deals, opts);
+  fs.writeFile(`./client/public/out/deals_extract.csv`, csv, (err) => {
+    if (err) {
+      console.log(err.message);
+      return res.send('Failed to create file.');
+    } else {
+      return res.send('Data extracted to csv.');
+    }
+  });
 });
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));

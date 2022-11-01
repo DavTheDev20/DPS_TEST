@@ -220,6 +220,20 @@ function App() {
               <th>Relationship Manager</th>
               <th>Deal Amount</th>
               <th>
+                <Button
+                  className="mx-2"
+                  variant="success"
+                  onClick={async (e) => {
+                    e.preventDefault();
+                    const res = await axios.get(
+                      'http://localhost:8080/api/deals/extract'
+                    );
+                    console.log(res.data);
+                    window.location.replace('/out/deals_extract.csv');
+                  }}
+                >
+                  Export Deals
+                </Button>
                 <Button onClick={handleShowAddDealMenu}>Create New Deal</Button>
               </th>
             </tr>
