@@ -133,6 +133,23 @@ function App() {
       });
   };
 
+  const handleDealDelete = () => {
+    axios({
+      method: 'DELETE',
+      url: `http://localhost:8080/api/deals/delete/${dealInFocus.id}`,
+    })
+      .then((res) => {
+        console.log(res);
+        setShowEditDealMenu(false);
+        getDealData();
+        return;
+      })
+      .catch((err) => {
+        console.log(err);
+        return alert(err.message);
+      });
+  };
+
   const handleShowAddDealMenu = () => setShowAddDealMenu(true);
   const handleCloseAddDealMenu = () => setShowAddDealMenu(false);
   const handleShowEditDealMenu = () => setShowEditDealMenu(true);
@@ -282,7 +299,9 @@ function App() {
                       </InputGroup>
                     </Modal.Body>
                     <Modal.Footer>
-                      <Button variant="danger">Delete Deal</Button>
+                      <Button variant="danger" onClick={handleDealDelete}>
+                        Delete Deal
+                      </Button>
                       <Button
                         variant="warning"
                         type="button"

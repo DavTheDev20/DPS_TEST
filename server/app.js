@@ -81,5 +81,13 @@ app.put('/api/deals/edit/:dealId', async (req, res) => {
     return res.status(400).json({ success: false, error: err.message });
   }
 });
+app.delete('/api/deals/delete/:dealId', async (req, res) => {
+  try {
+    const dbResponse = await Deal.destroy({ where: { id: req.params.dealId } });
+    res.status(200).json({ success: true, reponse: dbResponse });
+  } catch (err) {
+    return res.status(400).json({ success: false, error: err.message });
+  }
+});
 
 app.listen(PORT, () => console.log(`Server running on port: ${PORT}`));
