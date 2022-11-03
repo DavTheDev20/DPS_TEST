@@ -219,6 +219,7 @@ function App() {
               <th>Name</th>
               <th>Relationship Manager</th>
               <th>Deal Amount</th>
+              <th>Deal Date</th>
               <th>
                 <Button
                   className="mx-2"
@@ -261,6 +262,7 @@ function App() {
                     <td>{deal.name}</td>
                     <td>{deal.relationshipManager}</td>
                     <td>$ {deal.dealAmount.toLocaleString()}</td>
+                    <td>{new Date(deal.createdAt).toLocaleDateString()}</td>
                     <td>
                       <Button
                         variant="secondary"
