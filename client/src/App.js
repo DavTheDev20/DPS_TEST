@@ -22,6 +22,13 @@ function App() {
   });
   const [dealData, setDealData] = useState([]);
   const [loadingData, setLoadingData] = useState(false);
+  const relationshipManagers = [
+    'Davin Reid',
+    'Nina Goldfarb',
+    'John Doe',
+    'Jane Doe',
+    'Mike Williams',
+  ];
 
   const getDealData = async () => {
     setLoadingData(true);
@@ -155,6 +162,14 @@ function App() {
   const handleShowEditDealMenu = () => setShowEditDealMenu(true);
   const handleCloseEditDealMenu = () => setShowEditDealMenu(false);
 
+  const DEALS_TOTAL = () => {
+    var totalDealsVal = 0;
+    dealData.map((deal) => {
+      totalDealsVal += deal.dealAmount;
+    });
+    return totalDealsVal;
+  };
+
   return (
     <div>
       <Navbar bg="dark" variant="dark">
@@ -194,8 +209,13 @@ function App() {
               value={newDealData.relationshipManager}
             >
               <option>Select a Relationship Manager for your deal</option>
-              <option value="Bob Jones">Bob Jones</option>
-              <option value="Kelly Hartland">Kelly Hartland</option>
+              {relationshipManagers.map((name, index) => {
+                return (
+                  <option value={name} key={index}>
+                    {name.toUpperCase()}
+                  </option>
+                );
+              })}
             </Form.Select>
             <InputGroup>
               <Form.Control
@@ -332,6 +352,20 @@ function App() {
               );
             })}
           </tbody>
+          <tfoot>
+            <tr>
+              <td>
+                <strong>Total</strong>
+              </td>
+              <td></td>
+              <td></td>
+              <td>
+                <strong>$ {DEALS_TOTAL().toLocaleString()}</strong>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tfoot>
         </Table>
       </div>
     </div>
