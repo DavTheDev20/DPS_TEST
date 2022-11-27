@@ -2,7 +2,8 @@ import './App.css';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { Form, InputGroup, Spinner, Navbar, Container } from 'react-bootstrap';
+import Navbar from 'react-bootstrap/Navbar';
+import { Form, InputGroup, Spinner, Container } from 'react-bootstrap';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -165,7 +166,7 @@ function App() {
   const DEALS_TOTAL = () => {
     var totalDealsVal = 0;
     dealData.map((deal) => {
-      totalDealsVal += deal.dealAmount;
+      return (totalDealsVal += deal.dealAmount);
     });
     return totalDealsVal;
   };
