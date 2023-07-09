@@ -60,7 +60,7 @@ app.post('/api/create/deal', async (req, res, next) => {
   const newDeal = await Deal.create({
     name: name,
     relationshipManager: relationshipManager.toUpperCase(),
-    dealAmount: dealAmount,
+    dealAmount: parseFloat(dealAmount.replaceAll(",", "")),
   });
 
   return res.status(200).json({ success: true, dealDetails: newDeal });
