@@ -351,7 +351,7 @@ function App() {
                   </Modal>
                 </>
               );
-            })}
+            }).reverse()}
           </tbody>
           <tfoot>
             <tr>
